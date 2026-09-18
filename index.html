@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Student Toolkit - Calculator, Percentage, CGPA, Marks, Salary, Age, Timer and Number Converter">
+    <title>Student Toolkit | All-in-One Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar">
+        <div class="logo">✨ Student<span>Toolkit</span></div>
+
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#tools">Tools</a>
+            <a href="#about">About</a>
+        </div>
+
+        <button id="themeBtn" class="theme-btn">🌙</button>
+    </nav>
+</header>
+
+<main>
+
+<section id="home" class="hero">
+    <div class="hero-content">
+        <div class="badge">🚀 YOUR EVERYDAY STUDENT TOOLKIT</div>
+
+        <h1>
+            Everything You Need,
+            <span>In One Place.</span>
+        </h1>
+
+        <p>
+            Calculate marks, percentage, CGPA, salary, age, numbers
+            and manage your study time with simple and beautiful tools.
+        </p>
+
+        <a href="#tools" class="hero-btn">Explore Tools ↓</a>
+    </div>
+
+    <div class="hero-card">
+        <div class="floating-card card1">📊 Percentage</div>
+        <div class="floating-card card2">🧮 Calculator</div>
+        <div class="floating-card card3">🎓 CGPA</div>
+        <div class="circle">✨</div>
+    </div>
+</section>
+
+<section id="tools" class="tools-section">
+
+    <div class="section-heading">
+        <p>TOOLS</p>
+        <h2>Choose Your Tool</h2>
+        <span>Everything you need for your daily calculations.</span>
+    </div>
+
+    <div class="tool-grid">
+
+        <button class="tool-card active-tool" onclick="showTool('calculator')">
+            <div class="tool-icon purple">🧮</div>
+            <h3>Calculator</h3>
+            <p>Perform basic calculations</p>
+        </button>
+
+        <button class="tool-card" onclick="showTool('percentage')">
+            <div class="tool-icon pink">📊</div>
+            <h3>Percentage</h3>
+            <p>Marks to percentage</p>
+        </button>
+
+        <button class="tool-card" onclick="showTool('cgpa')">
+            <div class="tool-icon blue">🎓</div>
+            <h3>CGPA Converter</h3>
+            <p>Convert CGPA and percentage</p>
+        </button>
+
+        <button class="tool-card" onclick="showTool('marks')">
+            <div class="tool-icon green">📝</div>
+            <h3>Marks Calculator</h3>
+            <p>Calculate multiple subjects</p>
+        </button>
+
+        <button class="tool-card" onclick="showTool('salary')">
+            <div class="tool-icon orange">💰</div>
+            <h3>Salary Calculator</h3>
+            <p>Calculate gross salary</p>
+        </button>
+
+        <button class="tool-card" onclick="showTool('age')">
+            <div class="tool-icon red">🎂</div>
+            <h3>Age Calculator</h3>
+            <p>Calculate your exact age</p>
+        </button>
+
+        <button class="tool-card" onclick="showTool('timer')">
+            <div class="tool-icon cyan">⏱️</div>
+            <h3>Study Timer</h3>
+            <p>Pomodoro study timer</p>
+        </button>
+
+        <button class="tool-card" onclick="showTool('number')">
+            <div class="tool-icon yellow">🔢</div>
+            <h3>Number Converter</h3>
+            <p>Binary, decimal, octal & hex</p>
+        </button>
+
+    </div>
+
+    <div class="tool-area">
+
+        <!-- CALCULATOR -->
+
+        <div id="calculator" class="tool-panel active">
+
+            <div class="panel-title">
+                <span>🧮</span>
+                <div>
+                    <h2>Normal Calculator</h2>
+                    <p>Perform quick calculations</p>
+                </div>
+            </div>
+
+            <div class="calculator">
+
+                <input type="text" id="calcDisplay" readonly>
+
+                <div class="calc-buttons">
+                    <button class="danger" onclick="clearCalc()">AC</button>
+                    <button onclick="deleteCalc()">⌫</button>
+                    <button onclick="calcInput('%')">%</button>
+                    <button class="operator" onclick="calcInput('/')">÷</button>
+
+                    <button onclick="calcInput('7')">7</button>
+                    <button onclick="calcInput('8')">8</button>
+                    <button onclick="calcInput('9')">9</button>
+                    <button class="operator" onclick="calcInput('*')">×</button>
+
+                    <button onclick="calcInput('4')">4</button>
+                    <button onclick="calcInput('5')">5</button>
+                    <button onclick="calcInput('6')">6</button>
+                    <button class="operator" onclick="calcInput('-')">−</button>
+
+                    <button onclick="calcInput('1')">1</button>
+                    <button onclick="calcInput('2')">2</button>
+                    <button onclick="calcInput('3')">3</button>
+                    <button class="operator" onclick="calcInput('+')">+</button>
+
+                    <button class="zero" onclick="calcInput('0')">0</button>
+                    <button onclick="calcInput('.')">.</button>
+                    <button class="equal" onclick="calculate()">=</button>
+                </div>
+
+            </div>
+
+            <div class="history-box">
+                <div class="history-head">
+                    <h3>Calculation History</h3>
+                    <button onclick="clearHistory()">Clear</button>
+                </div>
+                <div id="history"></div>
+            </div>
+
+        </div>
+
+
+        <!-- PERCENTAGE -->
+
+        <div id="percentage" class="tool-panel">
+
+            <div class="panel-title">
+                <span>📊</span>
+                <div>
+                    <h2>Marks → Percentage</h2>
+                    <p>Convert your marks into percentage</p>
+                </div>
+            </div>
+
+            <div class="form-card">
+
+                <label>Obtained Marks</label>
+                <input type="number" id="obtained" placeholder="Example: 450">
+
+                <label>Total Marks</label>
+                <input type="number" id="total" placeholder="Example: 500">
+
+                <button class="primary-btn" onclick="calculatePercentage()">
+                    Calculate Percentage
+                </button>
+
+                <button class="reset-btn" onclick="resetPercentage()">Reset</button>
+
+                <div id="percentageResult" class="result-box"></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- CGPA -->
+
+        <div id="cgpa" class="tool-panel">
+
+            <div class="panel-title">
+                <span>🎓</span>
+                <div>
+                    <h2>CGPA Converter</h2>
+                    <p>Convert CGPA and percentage</p>
+                </div>
+            </div>
+
+            <div class="two-columns">
+
+                <div class="form-card">
+                    <h3>CGPA → Percentage</h3>
+
+                    <label>CGPA</label>
+                    <input type="number" step="0.01" id="cgpaValue" placeholder="Example: 8.5">
+
+                    <label>Conversion Factor</label>
+                    <input type="number" step="0.01" id="cgpaFactor" value="9.5">
+
+                    <button class="primary-btn" onclick="cgpaToPercentage()">
+                        Convert
+                    </button>
+
+                    <div id="cgpaResult" class="result-box"></div>
+                </div>
+
+                <div class="form-card">
+                    <h3>Percentage → CGPA</h3>
+
+                    <label>Percentage</label>
+                    <input type="number" step="0.01" id="percentageValue" placeholder="Example: 80">
+
+                    <label>Conversion Factor</label>
+                    <input type="number" step="0.01" id="percentageFactor" value="9.5">
+
+                    <button class="primary-btn" onclick="percentageToCgpa()">
+                        Convert
+                    </button>
+
+                    <div id="percentageCgpaResult" class="result-box"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- MARKS -->
+
+        <div id="marks" class="tool-panel">
+
+            <div class="panel-title">
+                <span>📝</span>
+                <div>
+                    <h2>Multiple Subject Marks</h2>
+                    <p>Calculate total marks and percentage</p>
+                </div>
+            </div>
+
+            <div id="subjects">
+
+                <div class="subject-row">
+                    <input type="text" placeholder="Subject">
+                    <input type="number" class="subject-obtained" placeholder="Obtained">
+                    <input type="number" class="subject-total" placeholder="Total">
+                    <button onclick="removeSubject(this)">×</button>
+                </div>
+
+                <div class="subject-row">
+                    <input type="text" placeholder="Subject">
+                    <input type="number" class="subject-obtained" placeholder="Obtained">
+                    <input type="number" class="subject-total" placeholder="Total">
+                    <button onclick="removeSubject(this)">×</button>
+                </div>
+
+            </div>
+
+            <div class="subject-actions">
+                <button class="secondary-btn" onclick="addSubject()">+ Add Subject</button>
+                <button class="primary-btn" onclick="calculateMarks()">Calculate</button>
+            </div>
+
+            <div id="marksResult" class="result-box"></div>
+
+        </div>
+
+
+        <!-- SALARY -->
+
+        <div id="salary" class="tool-panel">
+
+            <div class="panel-title">
+                <span>💰</span>
+                <div>
+                    <h2>Salary Calculator</h2>
+                    <p>Calculate gross and net salary</p>
+                </div>
+            </div>
+
+            <div class="two-columns">
+
+                <div class="form-card">
+
+                    <label>Basic Salary</label>
+                    <input type="number" id="basicSalary" placeholder="₹ 20,000">
+
+                    <label>DA (%)</label>
+                    <input type="number" id="daPercent" placeholder="Example: 40">
+
+                    <label>HRA (%)</label>
+                    <input type="number" id="hraPercent" placeholder="Example: 15">
+
+                    <label>Other Allowances</label>
+                    <input type="number" id="otherAllowance" placeholder="₹ 2,000">
+
+                    <label>Deductions</label>
+                    <input type="number" id="deductions" placeholder="₹ 1,000">
+
+                    <button class="primary-btn" onclick="calculateSalary()">
+                        Calculate Salary
+                    </button>
+
+                </div>
+
+                <div id="salaryResult" class="salary-result">
+
+                    <div>
+                        <span>Basic</span>
+                        <strong id="salaryBasic">₹0</strong>
+                    </div>
+
+                    <div>
+                        <span>DA</span>
+                        <strong id="salaryDA">₹0</strong>
+                    </div>
+
+                    <div>
+                        <span>HRA</span>
+                        <strong id="salaryHRA">₹0</strong>
+                    </div>
+
+                    <div>
+                        <span>Other Allowances</span>
+                        <strong id="salaryOther">₹0</strong>
+                    </div>
+
+                    <div class="salary-total">
+                        <span>Gross Salary</span>
+                        <strong id="grossSalary">₹0</strong>
+                    </div>
+
+                    <div class="salary-total">
+                        <span>Net Salary</span>
+                        <strong id="netSalary">₹0</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- AGE -->
+
+        <div id="age" class="tool-panel">
+
+            <div class="panel-title">
+                <span>🎂</span>
+                <div>
+                    <h2>Age Calculator</h2>
+                    <p>Calculate your exact age</p>
+                </div>
+            </div>
+
+            <div class="form-card">
+
+                <label>Date of Birth</label>
+                <input type="date" id="dob">
+
+                <button class="primary-btn" onclick="calculateAge()">
+                    Calculate Age
+                </button>
+
+                <div id="ageResult" class="result-box"></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- TIMER -->
+
+        <div id="timer" class="tool-panel">
+
+            <div class="panel-title">
+                <span>⏱️</span>
+                <div>
+                    <h2>Study Timer</h2>
+                    <p>Focus using the Pomodoro technique</p>
+                </div>
+            </div>
+
+            <div class="timer">
+
+                <div class="timer-mode">
+                    <button onclick="setTimer(25)">25 min</button>
+                    <button onclick="setTimer(50)">50 min</button>
+                    <button onclick="setTimer(5)">5 min</button>
+                </div>
+
+                <div id="timerDisplay">25:00</div>
+
+                <div class="timer-buttons">
+                    <button onclick="startTimer()">▶ Start</button>
+                    <button onclick="pauseTimer()">⏸ Pause</button>
+                    <button onclick="resetTimer()">↻ Reset</button>
+                </div>
+
+                <p id="timerMessage">Stay focused. You've got this! 💪</p>
+
+            </div>
+
+        </div>
+
+
+        <!-- NUMBER -->
+
+        <div id="number" class="tool-panel">
+
+            <div class="panel-title">
+                <span>🔢</span>
+                <div>
+                    <h2>Number Converter</h2>
+                    <p>Convert numbers between different systems</p>
+                </div>
+            </div>
+
+            <div class="form-card">
+
+                <label>Enter Decimal Number</label>
+                <input type="number" id="decimalNumber" placeholder="Example: 255">
+
+                <button class="primary-btn" onclick="convertNumber()">
+                    Convert
+                </button>
+
+                <div class="conversion-grid">
+
+                    <div>
+                        <span>Binary</span>
+                        <strong id="binaryResult">-</strong>
+                    </div>
+
+                    <div>
+                        <span>Octal</span>
+                        <strong id="octalResult">-</strong>
+                    </div>
+
+                    <div>
+                        <span>Hexadecimal</span>
+                        <strong id="hexResult">-</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="about" class="about">
+
+    <div class="about-content">
+
+        <div>
+            <p class="section-small">ABOUT THIS WEBSITE</p>
+
+            <h2>Your Personal Digital Toolkit 🚀</h2>
+
+            <p>
+                StudentToolkit is designed to make everyday calculations
+                easier. From academic marks and CGPA to salary calculations,
+                age, number systems and study time, everything is available
+                in one simple website.
+            </p>
+        </div>
+
+        <div class="about-cards">
+
+            <div>
+                <span>⚡</span>
+                <h3>Fast</h3>
+                <p>Instant calculations</p>
+            </div>
+
+            <div>
+                <span>📱</span>
+                <h3>Responsive</h3>
+                <p>Works on all devices</p>
+            </div>
+
+            <div>
+                <span>🔒</span>
+                <h3>Private</h3>
+                <p>Calculations stay in browser</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<footer>
+    <div class="footer-logo">✨ StudentToolkit</div>
+
+    <p>
+        Made with ❤️ for students
+    </p>
+
+    <p class="copyright">
+        © 2026 StudentToolkit. All rights reserved.
+    </p>
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
